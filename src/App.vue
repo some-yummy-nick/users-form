@@ -1,25 +1,15 @@
 <script setup lang="ts">
 import Header from '@/components/Header.vue'
-function handleAdd() {
+import { useUsersStore } from '@/stores/users.ts'
+import Users from "@/components/Users.vue";
+const usersStore = useUsersStore()
 
+function handleAdd() {
+  usersStore.add()
 }
 </script>
 
 <template>
   <Header @handle-add='handleAdd' />
+  <Users/>
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
