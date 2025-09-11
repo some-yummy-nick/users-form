@@ -1,25 +1,25 @@
 export type User = {
-  login: string
-  password: string
-  labels: Labels[]
-  type:UserType
+    login: string
+    password: string | null
+    labels: Labels[]
+    type: UserType
 }
 
 export enum UserType {
-  LDAP = 'ldap',
-  LOCAL = 'local'
+    LDAP = 'ldap',
+    LOCAL = 'local'
+}
+
+export enum UserTypeNames {
+    LDAP = 'LDAP',
+    LOCAL = 'Локальная'
 }
 
 export type Labels = {
-  value: string
-  parsed: Label[]
+    value: string
+    parsed: Label[]
 }
 
 export type Label = {
-  text: string
-}
-
-export type Password = {
-  isVisible: boolean
-  value: string
+    text: string
 }

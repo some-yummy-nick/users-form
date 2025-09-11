@@ -8,7 +8,7 @@ import type {User} from "@/data/User.ts";
 const usersStore = useUsersStore()
 
 usersStore.loadData()
-const items = ref<User>(usersStore.users)
+const items = ref<User[]>(usersStore.users)
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 
-const getItem = (key:string, storage:any) => {
+const getItem = (key:any, storage:any) => {
     let value = storage.getItem(key);
     if (!value) {
         return null;
@@ -12,7 +12,7 @@ const getItem = (key:string, storage:any) => {
     }
 }
 
-export const useStorage = (key:string, type = 'session') => {
+export const useStorage = (key:any, type = 'session') => {
     let storage = null;
     switch (type) {
         case 'session':
@@ -26,7 +26,7 @@ export const useStorage = (key:string, type = 'session') => {
     }
     const value = ref(getItem(key, storage));
     const setItem = (storage:any) => {
-        return (newValue:string) => {
+        return (newValue:any) => {
             value.value = newValue;
             storage.setItem(key, JSON.stringify(newValue));
         }

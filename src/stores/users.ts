@@ -1,8 +1,9 @@
-import { defineStore } from 'pinia';
-import { User } from '@/data/User'
+import {defineStore} from 'pinia';
+import {User} from '@/data/User'
 import {useStorage} from "@/hooks/useStorage.ts";
 
 const DATA_KEY = 'data'
+// @ts-ignore
 const [data, setData] = useStorage(DATA_KEY);
 
 interface UsersState {
@@ -17,11 +18,23 @@ export const useUsersStore = defineStore('users', {
         loadData() {
             if (data.value) this.users = data
         },
+        saveLabels() {
+            this.users.forEach((user: User) => {
+                // @ts-ignore
+                const toArray = user.labels.split(';')
+                user.labels = toArray.map((item: string) => {
+                    if (item) {
+                        return {text: item}
+                    }
+                }).filter((item: any) => item)
+            })
+        },
         saveData() {
+            this.saveLabels()
             setData(this.users)
         },
         add() {
-            console.log(this.users);
+            // @ts-ignore
             this.users.push(new User())
         },
         remove(user: User) {
@@ -31,11 +44,5 @@ export const useUsersStore = defineStore('users', {
                 this.saveData()
             }
         },
-        parseLabels(user: User) {
-            user.labels.parsed = user.labels.value.split(';').map(text => ({
-                text
-            }))
-            this.saveData()
-        }
     },
 });
