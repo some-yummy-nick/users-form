@@ -1,7 +1,7 @@
 export type User = {
     login: string
-    password: string | null
-    labels: Labels[]
+    password: string
+    labels: any
     type: UserType
 }
 
@@ -13,11 +13,6 @@ export enum UserType {
 export enum UserTypeNames {
     LDAP = 'LDAP',
     LOCAL = 'Локальная'
-}
-
-export type Labels = {
-    value: string
-    parsed: Label[]
 }
 
 export type Label = {

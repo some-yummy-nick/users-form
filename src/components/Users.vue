@@ -18,7 +18,3 @@ const items = ref<User[]>(usersStore.users)
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

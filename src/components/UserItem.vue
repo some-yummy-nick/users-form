@@ -27,14 +27,9 @@ const types = [
 const showPasswordField = ref(true)
 const showPassword = ref(false)
 const required = ['password', 'login']
-const errors = ref<{ [key: string]: boolean }>({
-  password: false,
-  login: false,
-})
 
 function validation() {
   return required.every((el: string) => {
-    errors.value[el] = values.value[el] === '';
     return values.value[el] !== ''
   })
 }
@@ -49,21 +44,19 @@ function parseLabels() {
   if (!props.item.labels) {
     return
   }
-  // @ts-ignore
-  return props.item.labels.map((item: { text:string }) => item.text).join(';');
+
+  return props.item.labels.map((item: { text: string }) => item.text).join(';');
 }
 
 function handleSubmit() {
   props.item.login = values.value.login;
   props.item.password = values.value.password;
   props.item.labels = values.value.labels;
-  if (!Object.values(errors.value).every(el => el)) {
-    usersStore.saveData()
-  }
+  props.item.type = values.value.type;
+  usersStore.saveData()
 }
 
 function handleDelete() {
-  // @ts-ignore
   usersStore.remove(props.item)
 }
 

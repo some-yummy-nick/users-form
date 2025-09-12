@@ -20,13 +20,14 @@ export const useUsersStore = defineStore('users', {
         },
         saveLabels() {
             this.users.forEach((user: User) => {
-                // @ts-ignore
-                const toArray = user.labels.split(';')
-                user.labels = toArray.map((item: string) => {
-                    if (item) {
-                        return {text: item}
-                    }
-                }).filter((item: any) => item)
+                if (user.labels && typeof user.labels === 'string') {
+                    const toArray = user.labels.split(';')
+                    user.labels = toArray.map((item: string) => {
+                        if (item) {
+                            return {text: item}
+                        }
+                    }).filter((item: any) => item)
+                }
             })
         },
         saveData() {
@@ -34,7 +35,6 @@ export const useUsersStore = defineStore('users', {
             setData(this.users)
         },
         add() {
-            // @ts-ignore
             this.users.push(new User())
         },
         remove(user: User) {
